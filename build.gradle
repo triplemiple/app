@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'checkstyle'
 }
 
 group 'hexlet.code'
@@ -7,6 +9,19 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+}
+
+java {
+    sourceCompatibility = "20"
+    targetCompatibility = "20"
+}
+
+run {
+    standardInput = System.in
+}
+
+application {
+    mainClass = 'hexlet.code.App'
 }
 
 dependencies {
