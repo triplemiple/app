@@ -20,25 +20,27 @@ public class ProgressionGame {
         Random random = new Random();
 
         for (int i = 0; i < Constants.QUESTION_COUNT; i++) {
-            int progressionNumber = random.nextInt(START_RANGE_NUMBER, END_RANGE_NUMBER);
             int progressionSize = random.nextInt(MIN_PROGRESSION_LENGTH, MAX_PROGRESSION_LENGTH);
             int commonDifference = random.nextInt(START_RANGE_COMMON_DIFFERENCE, END_RANGE_COMMON_DIFFERENCE);
+            int progressionNumber = random.nextInt(START_RANGE_NUMBER, END_RANGE_NUMBER);
+            int progressionEndNumber = progressionNumber + commonDifference * progressionSize;
             int questionIndex = random.nextInt(0, progressionSize);
-            String answer = String.valueOf(progressionNumber + commonDifference * questionIndex);
+            int answerNumber = progressionNumber + commonDifference * questionIndex;
+
             StringBuilder question = new StringBuilder();
 
-            for (int j = 0; j < progressionSize; j++) {
-                progressionNumber += commonDifference;
-
-                if (j != questionIndex) {
-                    question.append(" ").append(progressionNumber);
-                } else {
+            do {
+                if (progressionNumber == answerNumber) {
                     question.append(" ..");
+                } else {
+                    question.append(" ").append(progressionNumber);
                 }
-            }
+
+                progressionNumber += commonDifference;
+            } while (progressionNumber <= progressionEndNumber);
 
             gameData.questions[i] = question.toString().trim();
-            gameData.answers[i] = answer;
+            gameData.answers[i] = String.valueOf(answerNumber);
         }
 
         gameData.gameDescription = DESCRIPTION;
