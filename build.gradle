@@ -12,8 +12,8 @@ repositories {
 }
 
 java {
-    sourceCompatibility = "20"
-    targetCompatibility = "20"
+    sourceCompatibility JavaVersion.VERSION_20
+    targetCompatibility JavaVersion.VERSION_20
 }
 
 run {
