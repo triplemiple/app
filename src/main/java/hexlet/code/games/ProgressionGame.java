@@ -24,18 +24,10 @@ public class ProgressionGame {
             int progressionSize = random.nextInt(MIN_PROGRESSION_LENGTH, MAX_PROGRESSION_LENGTH);
             int commonDifference = random.nextInt(START_RANGE_COMMON_DIFFERENCE, END_RANGE_COMMON_DIFFERENCE);
             int questionIndex = random.nextInt(0, progressionSize);
-
+            String answer = String.valueOf(progressionNumber + commonDifference * questionIndex);
             StringBuilder question = new StringBuilder();
 
-            if (questionIndex == 0) {
-                question.append("..");
-            } else {
-                question.append(progressionNumber);
-            }
-
-            String answer = String.valueOf(progressionNumber + commonDifference * questionIndex);
-
-            for (int j = 1; j < progressionSize; j++) {
+            for (int j = 0; j < progressionSize; j++) {
                 progressionNumber += commonDifference;
 
                 if (j != questionIndex) {
@@ -45,12 +37,11 @@ public class ProgressionGame {
                 }
             }
 
-            gameData.questions[i] = question.toString();
+            gameData.questions[i] = question.toString().trim();
             gameData.answers[i] = answer;
         }
 
         gameData.gameDescription = DESCRIPTION;
-
         return gameData;
     }
 }
